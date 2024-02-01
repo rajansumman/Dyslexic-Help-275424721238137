@@ -10,6 +10,23 @@
 
     <title>ReadingHelper</title>
     <style>
+      /* Default styles */
+      .Textbox,
+      .output-container {
+        background-color: #0092f8;
+        border: 2px solid #0092f8;
+      }
+
+      .toggle-button {
+        background-color: #0092f8;
+        color: white;
+        padding: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+      }
+
       * {
         font-family: "open-dyslexic";
       }
@@ -26,7 +43,6 @@
         display: block;
         margin: 0 auto;
         border-radius: 25px;
-        background-color: #0092f8;
         color: black;
         font-size: large;
         resize: none; /* Disable resizing */
@@ -43,9 +59,7 @@
       .output-container {
         margin-top: 20px;
         padding: 20px;
-        border: 2px solid #0092f8;
         border-radius: 10px;
-        background-color: #0092f8;
         font-size: xx-large;
         text-align: left; /* Default alignment */
         white-space: pre-wrap; /* Preserve whitespace and line breaks */
@@ -65,6 +79,18 @@
         var textBox = document.querySelector(".Textbox");
         var outputContainer = document.querySelector(".output-container");
         var centerCheckbox = document.getElementById("centerCheckbox");
+        var toggleButton = document.querySelector(".toggle-button");
+
+        toggleButton.addEventListener("click", function () {
+          // Toggle background color between blue and purple
+          var currentColor =
+            getComputedStyle(textBox).getPropertyValue("background-color");
+          var newColor =
+            currentColor === "rgb(0, 146, 248)" ? "#7e38b7" : "#0092f8";
+
+          textBox.style.backgroundColor = newColor;
+          outputContainer.style.backgroundColor = newColor;
+        });
 
         textBox.addEventListener("keydown", function (event) {
           if (event.key === "Enter") {
@@ -104,7 +130,7 @@
     />
     <textarea
       class="Textbox"
-      placeholder="Please enter the text you want to dyslexify"
+      placeholder="Please enter the HTML content you wish to display"
     ></textarea>
 
     <label for="centerCheckbox">Center Text in Output:</label>
@@ -113,5 +139,7 @@
     <div class="output-container">
       <!-- The generated HTML content will be displayed here -->
     </div>
+
+    <button class="toggle-button">Purple On/Off</button>
   </body>
 </html>
